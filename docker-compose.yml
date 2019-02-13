@@ -4,6 +4,7 @@ services:
     image: "fluent/fluentd:v1.3.3-debian-1.0"
     volumes:
       - ./config:/fluentd/etc
+      - ./output_file:/output_file
     ports:
       - '8888:8888'
       - '24220:24220'
