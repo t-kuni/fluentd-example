@@ -3,29 +3,31 @@ services:
   collector:
     build: collector
     volumes:
+      - ./input:/input
       - ./output_file:/output_file
+      - ./collector/fluent.conf:/fluentd/etc/fluent.conf
     ports:
       - '8888:8888'
       - '24220:24220'
     command: fluentd -c /fluentd/etc/fluent.conf -v
-    depends_on:
-      - store
-  store:
-    image: elasticsearch:5.6.14-alpine
-    ports:
-      - '9200:9200'
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-  bi:
-    image: kibana:5.6.14
-    ports:
-      - '5601:5601'
-    environment:
-      ELASTICSEARCH_URL: 'http://store:9200'
-      ELASTICSEARCH_HOSTS: 'http://store:9200'
+#    depends_on:
+#      - store
+#  store:
+#    image: elasticsearch:5.6.14-alpine
+#    ports:
+#      - '9200:9200'
+#    environment:
+#      - cluster.name=docker-cluster
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#    ulimits:
+#      memlock:
+#        soft: -1
+#        hard: -1
+#  bi:
+#    image: kibana:5.6.14
+#    ports:
+#      - '5601:5601'
+#    environment:
+#      ELASTICSEARCH_URL: 'http://store:9200'
+#      ELASTICSEARCH_HOSTS: 'http://store:9200'

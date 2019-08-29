@@ -5,6 +5,13 @@
 * embulk
 * 可視化
 
+
+# fluentdの設定ファイルのチェック
+
+```sh
+docker-compose run --rm collector fluentd --dry-run -c /fluentd/etc/fluent.conf
+```
+
 fluentdにjsonをポスト
 
 ```
@@ -22,3 +29,8 @@ KibanaのURL
 ```
 192.168.99.100:5601
 ```
+
+# GAからデータ取得
+
+https://github.com/cmeerbeek/fluent-plugin-googleanalytics
+
