@@ -5,11 +5,10 @@ services:
     volumes:
       - ./input:/input
       - ./output_file:/output_file
-      - ./collector/fluent.conf:/fluentd/etc/fluent.conf
+      - ./collector/fluent.template.conf:/fluentd/etc/fluent.template.conf
     ports:
       - '8888:8888'
       - '24220:24220'
-    command: fluentd -c /fluentd/etc/fluent.conf -v
 #    depends_on:
 #      - store
 #  store:
